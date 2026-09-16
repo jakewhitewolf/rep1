@@ -1,0 +1,99 @@
+@startuml
+abstract class com.example.rep1.Handler {
+- Handler processor
++ boolean process(Integer)
+}
+
+
+class com.example.rep1.MainController {
+- Label moneyLabel
+- Label lootLabel
+- Label eventLabel
+- GameState game
+- ActionChain actionChain
++ void initialize()
+- void onOldMine()
+- void onDeepMine()
+- void onAbandonedMine()
+- void play(int)
+- void onTakeLoot()
+- void updateInterface()
+}
+
+
+class com.example.rep1.LuckyHandler {
+- GameState game
++ boolean process(Integer)
+}
+
+
+class com.example.rep1.MainApplication {
++ void start(Stage)
++ {static} void main(String[])
+}
+
+class com.example.rep1.EmptyHandler {
+- GameState game
++ boolean process(Integer)
+}
+
+
+class com.example.rep1.CollapseHandler {
+- GameState game
++ boolean process(Integer)
+}
+
+
+class com.example.rep1.GameState {
+- int money
+- int loot
+- boolean freeMove
+- String lastEvent
++ boolean pay()
++ void addLoot(int)
++ void takeLoot()
++ void loseLoot()
++ void giveFreeMove()
++ int getMoney()
++ int getLoot()
++ boolean isFreeMove()
++ String getLastEvent()
++ void setLastEvent(String)
+}
+
+
+class com.example.rep1.OreHandler {
+- GameState game
+- Random random
++ boolean process(Integer)
+}
+
+
+class com.example.rep1.ActionChain {
++ {static} int ORE
++ {static} int GEM
++ {static} int EMPTY
++ {static} int COLLAPSE
++ {static} int LUCKY
+- Handler chain
+- Random random
++ boolean process(int)
+- int generateResult(int)
+}
+
+
+class com.example.rep1.GemHandler {
+- GameState game
++ boolean process(Integer)
+}
+
+
+
+
+com.example.rep1.Handler <|-- com.example.rep1.LuckyHandler
+javafx.application.Application <|-- com.example.rep1.MainApplication
+com.example.rep1.Handler <|-- com.example.rep1.EmptyHandler
+com.example.rep1.Handler <|-- com.example.rep1.CollapseHandler
+com.example.rep1.Handler <|-- com.example.rep1.OreHandler
+com.example.rep1.Handler <|-- com.example.rep1.GemHandler
+@enduml
